@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>हिन्दी वर्णमाला | Hindi Varnamala</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700;900&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6600;
+    --deep-saffron: #FF4500;
+    --ivory: #FFF8F0;
+    --ink: #1A0A00;
+    --gold: #D4A017;
+    --green: #138808;
+    --light-bg: #FFF3E8;
+    --card-bg: #FFFFFF;
+    --shadow: rgba(255,102,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--ivory);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--deep-saffron) 50%, #CC3300 100%);
+    text-align: center;
+    padding: 60px 20px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'अ आ इ ई उ ऊ ए ऐ ओ औ';
+    position: absolute;
+    top: -10px; left: 0; right: 0;
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 4rem;
+    opacity: 0.08;
+    letter-spacing: 8px;
+    color: #fff;
+    white-space: nowrap;
+    animation: drift 20s linear infinite;
+  }
+  @keyframes drift {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .hero-title {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    animation: popIn 0.8s cubic-bezier(0.175,0.885,0.32,1.275) both;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    margin-top: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: fadeUp 1s 0.3s both;
+  }
+  .tricolor-bar {
+    display: flex;
+    height: 5px;
+    margin: 0 auto;
+    width: 160px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 18px;
+  }
+  .tricolor-bar span { flex: 1; }
+  .tricolor-bar span:nth-child(1) { background: #FF9933; }
+  .tricolor-bar span:nth-child(2) { background: #FFFFFF; }
+  .tricolor-bar span:nth-child(3) { background: #138808; }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 20px 10px;
+  }
+  .section-label {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--saffron);
+    border-left: 5px solid var(--saffron);
+    padding-left: 14px;
+    margin-bottom: 8px;
+    animation: fadeUp 0.6s both;
+  }
+  .section-en {
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    padding-left: 20px;
+    margin-bottom: 28px;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 12px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 6px 10px;
+    cursor: default;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    opacity: 0;
+    animation: cardIn 0.5s forwards;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    opacity: 0;
+    transition: opacity 0.22s;
+    border-radius: 12px;
+    z-index: 0;
+  }
+  .card:hover::after   { opacity: 1; }
+  .card:hover          { transform: translateY(-6px) scale(1.06); box-shadow: 0 12px 28px rgba(255,102,0,0.3); }
+  .card:hover .devanagari { color: #fff; }
+  .card:hover .roman      { color: rgba(255,255,255,0.85); }
+
+  .devanagari {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    transition: color 0.22s;
+  }
+  .roman {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: #888;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.22s;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.85); }
+    to   { opacity: 1; transform: translateY(0)  scale(1); }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 900px;
+    margin: 40px auto 0;
+    border: none;
+    border-top: 1.5px dashed rgba(255,102,0,0.25);
+  }
+
+  /* ── CONSONANTS extra compact ── */
+  .grid-sm {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 10px;
+  }
+  .grid-sm .card { padding: 10px 4px 8px; }
+  .grid-sm .devanagari { font-size: 1.6rem; }
+
+  /* ── MATRAS ── */
+  .matra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+  }
+  .matra-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px var(--shadow);
+    padding: 12px 8px;
+    text-align: center;
+    opacity: 0;
+    animation: cardIn 0.5s forwards;
+    transition: transform 0.22s, box-shadow 0.22s;
+    cursor: default;
+  }
+  .matra-card:hover { transform: translateY(-5px); box-shadow: 0 10px 24px rgba(255,102,0,0.25); }
+  .matra-char {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--saffron);
+  }
+  .matra-word {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+  .matra-meaning { font-size: 0.68rem; color: #999; margin-top: 2px; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.8rem;
+    color: #bbb;
+    margin-top: 40px;
+    border-top: 1px solid #f0e8e0;
+  }
+  footer span { color: var(--saffron); }
+
+  /* ── STAGGER ── */
+  .card:nth-child(1)  { animation-delay: 0.02s; }
+  .card:nth-child(2)  { animation-delay: 0.04s; }
+  .card:nth-child(3)  { animation-delay: 0.06s; }
+  .card:nth-child(4)  { animation-delay: 0.08s; }
+  .card:nth-child(5)  { animation-delay: 0.10s; }
+  .card:nth-child(6)  { animation-delay: 0.12s; }
+  .card:nth-child(7)  { animation-delay: 0.14s; }
+  .card:nth-child(8)  { animation-delay: 0.16s; }
+  .card:nth-child(9)  { animation-delay: 0.18s; }
+  .card:nth-child(10) { animation-delay: 0.20s; }
+  .card:nth-child(11) { animation-delay: 0.22s; }
+  .card:nth-child(12) { animation-delay: 0.24s; }
+  .card:nth-child(13) { animation-delay: 0.26s; }
+  .card:nth-child(14) { animation-delay: 0.28s; }
+  .card:nth-child(15) { animation-delay: 0.30s; }
+  .card:nth-child(16) { animation-delay: 0.32s; }
+  .card:nth-child(17) { animation-delay: 0.34s; }
+  .card:nth-child(18) { animation-delay: 0.36s; }
+  .card:nth-child(19) { animation-delay: 0.38s; }
+  .card:nth-child(20) { animation-delay: 0.40s; }
+  .card:nth-child(n+21) { animation-delay: 0.44s; }
+
+  .matra-card:nth-child(1)  { animation-delay: 0.05s; }
+  .matra-card:nth-child(2)  { animation-delay: 0.10s; }
+  .matra-card:nth-child(3)  { animation-delay: 0.15s; }
+  .matra-card:nth-child(4)  { animation-delay: 0.20s; }
+  .matra-card:nth-child(5)  { animation-delay: 0.25s; }
+  .matra-card:nth-child(6)  { animation-delay: 0.30s; }
+  .matra-card:nth-child(7)  { animation-delay: 0.35s; }
+  .matra-card:nth-child(8)  { animation-delay: 0.40s; }
+  .matra-card:nth-child(9)  { animation-delay: 0.45s; }
+  .matra-card:nth-child(10) { animation-delay: 0.50s; }
+  .matra-card:nth-child(11) { animation-delay: 0.55s; }
+
+  @media (max-width: 480px) {
+    .grid    { grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 8px; }
+    .grid-sm { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 7px; }
+    .devanagari { font-size: 1.7rem; }
+    .grid-sm .devanagari { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <h1 class="hero-title">हिन्दी वर्णमाला</h1>
+  <p class="hero-sub">Hindi Varnamala · The Alphabet</p>
+  <div class="tricolor-bar"><span></span><span></span><span></span></div>
+</header>
+
+<!-- ══════════════ SWAR ══════════════ -->
+<section class="section">
+  <div class="section-label">स्वर</div>
+  <div class="section-en">Swar · Vowels</div>
+  <div class="grid" id="swar-grid"></div>
+</section>
+
+<hr class="divider">
+
+<!-- ══════════════ VYANJAN ══════════════ -->
+<section class="section">
+  <div class="section-label">व्यंजन</div>
+  <div class="section-en">Vyanjan · Consonants</div>
+  <div class="grid grid-sm" id="vyanjan-grid"></div>
+</section>
+
+<hr class="divider">
+
+<!-- ══════════════ MATRAS ══════════════ -->
+<section class="section">
+  <div class="section-label">मात्राएँ</div>
+  <div class="section-en">Matras · Vowel Diacritics · with क</div>
+  <div class="matra-grid" id="matra-grid"></div>
+</section>
+
+<footer>
+  <p>हिन्दी — भारत की राजभाषा &nbsp;|&nbsp; <span>Hindi</span> — Official Language of India</p>
+  <p style="margin-top:6px">देवनागरी लिपि में लिखी जाती है · Written in Devanagari Script</p>
+</footer>
+
+<script>
+// ── DATA ────────────────────────────────────────────────
+const swar = [
+  ['अ','a'],['आ','aa'],['इ','i'],['ई','ee'],
+  ['उ','u'],['ऊ','oo'],['ऋ','ri'],['ए','e'],
+  ['ऐ','ai'],['ओ','o'],['औ','au'],['अं','an'],
+  ['अः','ah'],['अँ','aṃ'],
+];
+
+const vyanjan = [
+  ['क','ka'],['ख','kha'],['ग','ga'],['घ','gha'],['ङ','ṅa'],
+  ['च','cha'],['छ','chha'],['ज','ja'],['झ','jha'],['ञ','ña'],
+  ['ट','ṭa'],['ठ','ṭha'],['ड','ḍa'],['ढ','ḍha'],['ण','ṇa'],
+  ['त','ta'],['थ','tha'],['द','da'],['ध','dha'],['न','na'],
+  ['प','pa'],['फ','pha'],['ब','ba'],['भ','bha'],['म','ma'],
+  ['य','ya'],['र','ra'],['ल','la'],['व','va'],
+  ['श','sha'],['ष','ṣha'],['स','sa'],['ह','ha'],
+  ['क्ष','kṣa'],['त्र','tra'],['ज्ञ','gya'],
+];
+
+const matras = [
+  { char: 'क',   word: 'कमल',   meaning: 'Lotus'    },
+  { char: 'का',  word: 'काम',   meaning: 'Work'     },
+  { char: 'कि',  word: 'किताब', meaning: 'Book'     },
+  { char: 'की',  word: 'कील',   meaning: 'Nail'     },
+  { char: 'कु',  word: 'कुत्ता', meaning: 'Dog'     },
+  { char: 'कू',  word: 'कूल',   meaning: 'Bank'     },
+  { char: 'के',  word: 'केला',  meaning: 'Banana'   },
+  { char: 'कै',  word: 'कैसा',  meaning: 'How'      },
+  { char: 'को',  word: 'कोट',   meaning: 'Coat'     },
+  { char: 'कौ',  word: 'कौन',   meaning: 'Who'      },
+  { char: 'कं',  word: 'कंघी',  meaning: 'Comb'     },
+];
+
+// ── RENDER ──────────────────────────────────────────────
+function makeCard(ch, rom) {
+  const d = document.createElement('div');
+  d.className = 'card';
+  d.innerHTML = `<span class="devanagari">${ch}</span><span class="roman">${rom}</span>`;
+  return d;
+}
+
+const sg = document.getElementById('swar-grid');
+swar.forEach(([c,r]) => sg.appendChild(makeCard(c, r)));
+
+const vg = document.getElementById('vyanjan-grid');
+vyanjan.forEach(([c,r]) => vg.appendChild(makeCard(c, r)));
+
+const mg = document.getElementById('matra-grid');
+matras.forEach(({ char, word, meaning }) => {
+  const d = document.createElement('div');
+  d.className = 'matra-card';
+  d.innerHTML = `
+    <div class="matra-char">${char}</div>
+    <div class="matra-word">${word}</div>
+    <div class="matra-meaning">${meaning}</div>
+  `;
+  mg.appendChild(d);
+});
+
+// ── INTERSECTION OBSERVER for re-trigger on scroll ──────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.card, .matra-card').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
